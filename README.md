@@ -29,7 +29,9 @@ unpack buf
 
 LIMITATIONS
 ======
-orderd map is not implemented
+ordered map is not implemented
+
+protocol is not implemented
 
 integer is limited to signed 32bit integer
 
