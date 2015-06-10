@@ -1,0 +1,73 @@
+<html>
+<head>
+  <title>Welcome to nginx!</title>
+  <script type="text/javascript" src="./zepto.min.js"></script>
+  <script type="text/javascript" src="./wxutils.js"></script>
+  <script type="text/javascript" src="./sproto.js"></script>
+</head>
+<body>
+  <script>
+
+function handle_rsp(session, data)
+{
+    alert(JSON.stringify(data));
+}
+
+function dec() {
+    var socket = new WebSocket("ws://if-else.org:1123");
+socket.binaryType = "arraybuffer";
+
+    socket.onopen = function(event) {
+var s = {};
+        s.platform = "platform";
+s.game = "game";
+//alert(GetQueryString("code"));
+        s.token = GetQueryString("code");
+        sp.host("package");
+        var packer = sp.attach();
+        var p = packer("login", s, 1).buf;
+        var d = array2arraybuffer(p);
+        socket.send(d);
+        
+};
+
+socket.onmessage = function(event) {
+
+            var d = arraybuffer2array(event.data);
+            sp.dispatch({buf: d, sz: d.length}, handle_rsp, handle_rsp);
+        }; 
+        socket.onclose = function(event) { 
+            console.log('Client notified socket has closed',event);
+        };
+
+}
+
+var sp;
+
+var str;
+var xhr = new XMLHttpRequest();
+xhr.open('GET', './a', true);
+xhr.responseType = 'arraybuffer';
+
+xhr.onload = function(e) {
+    var buff = xhr.response;
+    var dataview = new DataView(buff);
+    var schema = new Array();
+    for (var i = 0; i < dataview.byteLength; i++) { 
+        schema[i] = dataview.getUint8(i); 
+    } 
+
+    sp = Sproto.createNew({buf:schema, sz:schema.length});
+
+    if (sp == null) {
+        alert("failed to create sproto");
+    } else {
+        dec();
+    }        
+};
+
+xhr.send();
+    
+  </script>
+</body>
+</html>
