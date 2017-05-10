@@ -444,7 +444,7 @@ var Sproto = {
             begin = 0;
             end = sproto.protocol_n;
             while (begin < end) {
-                var mid = (begin + end) / 2;
+                var mid = Math.floor((begin + end) / 2);
                 var t = sproto.proto[mid].tag;
                 if (t == proto) {
                     p = sproto.proto[mid];
@@ -456,7 +456,7 @@ var Sproto = {
                 }
             }
             if (p != null) {
-                return p.p[what];
+                return p;
             }
             return null;
         }
